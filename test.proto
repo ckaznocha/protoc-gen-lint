@@ -1,0 +1,60 @@
+syntax = "proto2";
+
+enum GoodEnum {
+    GOOD_VALUE_ONE = 0;
+    GOOD_VALUE_TWO = 1;
+}
+enum bad_enum {
+    bad_value_one = 0;
+    BadValueTwo = 1;
+}
+
+message GoodMessage {
+    required bool good_field_one = 1;
+    optional int32 good_field_two = 2;
+    message GoodNestedMessage {
+        required bool good_field_one = 1;
+        optional int32 good_field_two = 2;
+    }
+    optional GoodNestedMessage good_field_three = 3;
+    enum GoodNestedEnum {
+        GOOD_VALUE_ONE = 0;
+        GOOD_VALUE_TWO = 1;
+    }
+    optional GoodNestedEnum good_field_four = 4 [default = GOOD_VALUE_ONE];
+}
+
+message badMessage {
+    required bool badFieldOne = 1;
+    optional int32 BAD_FIELD_TWO = 2;
+    message GoodNestedMessage {
+        required bool good_field_one = 1;
+        optional int32 good_field_two = 2;
+    }
+    optional GoodNestedMessage BADFIELDTHREE = 3;
+    message BAD_NESTED_MESSAGE {
+        required bool BadFieldOne = 1;
+        optional int32 good_field_two = 2;
+    }
+    optional BAD_NESTED_MESSAGE good_field_four = 4;
+    enum GoodNestedEnum {
+        GOOD_VALUE_ONE = 0;
+        GOOD_VALUE_TWO = 1;
+    }
+    optional GoodNestedEnum good_field_five = 5 [default = GOOD_VALUE_ONE];
+    enum bad_nested_enum {
+        bad_value_one = 0;
+        BadValueTwo = 1;
+    }
+    optional bad_nested_enum good_field_six = 6 [default = bad_value_one];
+}
+
+service GoodService {
+    rpc GoodMethodOne (GoodMessage) returns (GoodMessage);
+    rpc GoodMethodTwo (GoodMessage) returns (GoodMessage);
+}
+
+service bad_service {
+    rpc bad_method_one (GoodMessage) returns (GoodMessage);
+    rpc badMethodTwo (GoodMessage) returns (GoodMessage);
+}
