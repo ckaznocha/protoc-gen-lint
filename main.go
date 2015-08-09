@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/ckaznocha/proc-gen-lint/linter"
+	"github.com/ckaznocha/protoc-gen-lint/linter"
 	"github.com/golang/protobuf/proto"
 	"github.com/golang/protobuf/protoc-gen-go/descriptor"
 	protoc "github.com/golang/protobuf/protoc-gen-go/plugin"
