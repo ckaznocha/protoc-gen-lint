@@ -1,7 +1,18 @@
 language: go
-install:
-  - go get -d ./...
-  - go get github.com/golang/lint/golint
+env:
+- GIMME_OS=darwin GIMME_ARCH=amd64
+- GIMME_OS=linux GIMME_ARCH=amd64
+- GIMME_OS=windows GIMME_ARCH=amd64
 script:
-  - golint ./...
-  - go test -v ./...
+- go build -v .
+deploy:
+  provider: releases
+  api_key:
+    secure: rKiP2lFonH6iEx7HEK8eFF77pct2P3KkZ7+JFYMxxoJRWWA2x7/1h/Nd8JpA/TSiZhjmzscIHMUr7vblUxXiGFDCG4Rra1beLoJFw+YFdjirppol5dSZyS485D0F5CDAe1QE7uVaJ/VjU6XDf3X2gPENw3jNDNGfde4JLiPITa+Xc2ThMMjBQnd8LyFAh+svgNdAQo77+EJR6CqVW9w3s/j4Do5QGt+bBjw4SoGDmOyLIxEjp8O/JbaUN6sYLAvonKrFDBF1DARr3VcZt7uP9kCtTinxxGA6I9BCR4ia0Iz4NUCrUcZiElzasrDE6WPvD2J/fni/qA5jZnMp75MqPEi/ypC5b1Rg+Qtq4GZnzD5xmvh+wFMdedhgVAUccpxDcs5XyKKTulEIxoKwoziE7BZCZBW5gmyu4n+WS2rBOT0bZBhCbs3yFJQ9b97w/dNDMtr86kC1iykYmW4Djth43caZSO7h1qUoKQ7GghWUkXnf9y6f2NapSF2xx/kXkCfb4uG2LJUtJpm4JDPjz2PwZ4bgISddlgwKzpzjec8vaS1xd3nS+NLY5jrFZKWcONXRDfCeamSI9537tM4uHzdlr7ZcXyvndlPqr226UUOnBHRu5QQFCfblQE1iKegF3fJZR6r4FJO62buZQsMC1maUtKwYmS514dezA85muPtcs5M=
+  file:
+    - "protoc-gen-lint_darwin_amd64"
+    - "protoc-gen-lint_linux_amd64"
+    - "protoc-gen-lint_windows_amd64.exe"
+  on:
+    repo: ckaznocha/protoc-gen-lint
+    tags: true

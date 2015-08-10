@@ -19,7 +19,7 @@ func (p *protoBufError) getSourceLineNumber(
 		var (
 			curPath = v.GetPath()
 			curLen  = len(curPath)
-			skip    bool
+			found   bool
 		)
 
 		// Started out using reflect.DeepEqual.
@@ -27,22 +27,20 @@ func (p *protoBufError) getSourceLineNumber(
 		if curLen == sourceLen {
 			for i := 0; i < sourceLen; i++ {
 				if curPath[i] != p.path[i] {
-					skip = true
 					break
 				}
+				found = true
 			}
 
-			if skip {
-				continue
+			if found {
+				var (
+					span = v.GetSpan()
+					line = span[0] + 1
+					col  = span[1] + 1
+				)
+
+				return line, col
 			}
-
-			var (
-				span = v.GetSpan()
-				line = span[0] + 1
-				col  = span[1] + 1
-			)
-
-			return line, col
 		}
 	}
 	return 0, 0
