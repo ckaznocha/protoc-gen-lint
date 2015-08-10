@@ -32,7 +32,8 @@ go get github.com/ckaznocha/protoc-gen-lint
 ### Download
 Download the latest release for your operating system
 [here](https://github.com/ckaznocha/protoc-gen-lint/releases/latest) then
-ensure it's available in your PATH.
+rename it to `protoc-gen-lint` (or protoc-gen-lint.exe` for windows) and ensure
+it's available in your PATH.
 
 ## Usage
 ```
@@ -42,7 +43,6 @@ protoc --lint_out=. *.proto
 ## TODO
 * Write more tests
 * Find out about any common protocol buffer smells to check for from the community
-* Automate GitHub releases
 
 ## Contributing
 See the `CONTRIBUTING` file.
