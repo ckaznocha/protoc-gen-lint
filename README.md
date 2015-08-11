@@ -31,9 +31,8 @@ go get github.com/ckaznocha/protoc-gen-lint
 
 ### Download
 Download the latest release for your operating system
-[here](https://github.com/ckaznocha/protoc-gen-lint/releases/latest) then
-rename it to `protoc-gen-lint` (or protoc-gen-lint.exe` for windows) and ensure
-it's available in your PATH.
+[here](https://github.com/ckaznocha/protoc-gen-lint/releases/latest) and ensure
+the executable is available in your PATH.
 
 ## Usage
 ```
