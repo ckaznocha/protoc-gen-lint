@@ -36,7 +36,7 @@ func main() {
 	protoFiles = generatorRequest.GetProtoFile()
 	protoFileNames = generatorRequest.GetFileToGenerate()
 
-	for i := 0; i < len(protoFiles); i++ {
+	for i := 0; i < len(protoFileNames); i++ {
 		numErrors, err := linter.LintProtoFile(
 			protoFileNames[i],
 			protoFiles[i],
