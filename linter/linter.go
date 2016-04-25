@@ -40,13 +40,9 @@ var linterErrors = map[int]string{
 // LintProtoFile takes a file name, proto file description, and a file.
 // It checks the file for errors and writes them to the output file
 func LintProtoFile(
-	fileName string,
 	protoFile *descriptor.FileDescriptorProto,
 	outFile io.WriteCloser,
 ) (int, error) {
-
-	defer outFile.Close()
-
 	var (
 		errors      = protoBufErrors{}
 		protoSource = protoFile.GetSourceCodeInfo()
@@ -63,22 +59,17 @@ func LintProtoFile(
 	for i, v := range protoFile.GetService() {
 		errors.lintProtoService(int32(i), v)
 	}
-
 	for _, v := range errors {
 		line, col := v.getSourceLineNumber(protoSource)
-		_, err := outFile.Write([]byte(
-			fmt.Sprintf(
-				"%s:%d:%d: '%s' - %s\n",
-				fileName,
-				line,
-				col,
-				v.errorString,
-				linterErrors[v.errorCode],
-			),
-		))
-		if err != nil {
-			return len(errors), err
-		}
+		fmt.Fprintf(
+			outFile,
+			"%s:%d:%d: '%s' - %s\n",
+			*protoFile.Name,
+			line,
+			col,
+			v.errorString,
+			linterErrors[v.errorCode],
+		)
 	}
 
 	return len(errors), nil
