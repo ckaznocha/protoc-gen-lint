@@ -22,7 +22,6 @@ func main() {
 		err              error
 		data             []byte
 		protoFiles       []*descriptor.FileDescriptorProto
-		protoFileNames   []string
 		totalErrors      int
 		generatorRequest = new(protoc.CodeGeneratorRequest)
 	)
@@ -34,14 +33,8 @@ func main() {
 	panicOnError(err)
 
 	protoFiles = generatorRequest.GetProtoFile()
-	protoFileNames = generatorRequest.GetFileToGenerate()
-
-	for i := 0; i < len(protoFileNames); i++ {
-		numErrors, err := linter.LintProtoFile(
-			protoFileNames[i],
-			protoFiles[i],
-			os.Stderr,
-		)
+	for _, file := range protoFiles {
+		numErrors, err := linter.LintProtoFile(file, os.Stderr)
 		panicOnError(err)
 		totalErrors += numErrors
 	}
