@@ -9,8 +9,8 @@ compiler to check `.proto` files for style violations.
 
 ## About
 This plug-in will check a `.proto` file for violations of Google's Protocol
-Buffers [Style Guide](https://developers.google.com/protocol-buffers/docs/style).
-The Protocol Buffers compiler already reports on compilation errors; by using
+Buffer [Style Guide](https://developers.google.com/protocol-buffers/docs/style).
+The protobuf compiler already reports on compilation errors; by using
 this plug-in you are also able to retrieve those compilation error with out
 writing any files which could be helpful for things like IDE integrations.
 
