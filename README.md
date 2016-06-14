@@ -11,8 +11,8 @@ compiler to check `.proto` files for style violations.
 This plug-in will check a `.proto` file for violations of Google's Protocol
 Buffer [Style Guide](https://developers.google.com/protocol-buffers/docs/style).
 The protobuf compiler already reports on compilation errors; by using
-this plug-in you are also able to retrieve those compilation error with out
-writing any files which could be helpful for things like IDE integrations.
+this plug-in you are also able to retrieve those compilation error without
+writing any file which could be helpful for things like IDE integrations.
 
 ## Installation
 Download `protoc-gen-lint` and make sure it's available in your PATH. Once it's
@@ -24,7 +24,7 @@ in your PATH. You can download it
 [here](https://developers.google.com/protocol-buffers/docs/downloads)
 
 ### go get
-If you have a go environment already set up you can use go get to install.
+If you have a go environment already set up you can use `go get` to install.
 ```
 go get github.com/ckaznocha/protoc-gen-lint
 ```
