@@ -1,6 +1,6 @@
 language: go
 go:
-  - 1.7.3
+  - tip
 env:
   - MY_GOOS=darwin MY_GOARCH=amd64
   - MY_GOOS=linux MY_GOARCH=amd64
