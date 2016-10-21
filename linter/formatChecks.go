@@ -8,9 +8,8 @@ import (
 
 func isCamelCase(s string) bool {
 	first, _ := utf8.DecodeRuneInString(s)
-	last, _ := utf8.DecodeLastRuneInString(s)
 	if unicode.IsLower(first) ||
-		unicode.IsUpper(last) ||
+		s == strings.ToUpper(s) ||
 		strings.Contains(s, "_") {
 		return false
 	}
