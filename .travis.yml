@@ -5,11 +5,10 @@ env:
   - MY_GOOS=darwin MY_GOARCH=amd64
   - MY_GOOS=linux MY_GOARCH=amd64
   - MY_GOOS=windows MY_GOARCH=amd64
-before_install:
-  - export GOOS="${MY_GOOS}"
-  - export GOARCH="${MY_GOARCH}"
 script:
   - go test -v ./...
+  - export GOOS="${MY_GOOS}"
+  - export GOARCH="${MY_GOARCH}"
   - go build -v .
 before_deploy:
   - zip  protoc-gen-lint_${GIMME_OS}_${GIMME_ARCH}.zip protoc-gen-lint* README.md LICENSE
