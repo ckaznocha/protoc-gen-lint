@@ -1,18 +1,14 @@
 language: go
+go:
+  - tip
 env:
-  - GIMME_OS=darwin GIMME_ARCH=amd64
-  - GIMME_OS=linux GIMME_ARCH=amd64
-  - GIMME_OS=windows GIMME_ARCH=amd64
-before_install:
-  - curl -o go.tar.gz -sL https://storage.googleapis.com/golang/go1.6.3.linux-amd64.tar.gz
-  - tar -C $HOME -xf go.tar.gz
-  - rm go.tar.gz
-  - export GOROOT="${HOME}/go"
-  - export PATH="${GOROOT}/bin:${PATH}"
-  - export GOOS="${MY_GOOS}"
-  - export GOARCH="${MY_GOARCH}"
+  - MY_GOOS=darwin MY_GOARCH=amd64
+  - MY_GOOS=linux MY_GOARCH=amd64
+  - MY_GOOS=windows MY_GOARCH=amd64
 script:
   - go test -v ./...
+  - export GOOS="${MY_GOOS}"
+  - export GOARCH="${MY_GOARCH}"
   - go build -v .
 before_deploy:
   - zip  protoc-gen-lint_${GIMME_OS}_${GIMME_ARCH}.zip protoc-gen-lint* README.md LICENSE
