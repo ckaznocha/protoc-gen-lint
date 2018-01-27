@@ -18,23 +18,32 @@ const (
 	pathMessageField   = 2
 	pathMessageMessage = 3
 	pathMessageEnum    = 4
-
-	//Error Types
-	errorMessageCase   = 1
-	errorFieldCase     = 2
-	errorEnumTypeCase  = 3
-	errorEnumValueCase = 4
-	errorServiceCase   = 5
-	errorRPCMethodCase = 6
 )
 
-var linterErrors = map[int]string{
-	1: "Use CamelCase (with an initial capital) for message names.",
-	2: "Use underscore_separated_names for field names.",
-	3: "Use CamelCase (with an initial capital) for enum type names.",
-	4: "Use CAPITALS_WITH_UNDERSCORES  for enum value names.",
-	5: "Use CamelCase (with an initial capital) for service names.",
-	6: "Use CamelCase (with an initial capital) for RPC method names.",
+type (
+	errorCode        int
+	errorDescription string
+)
+
+const (
+	//Error Types
+	errorImportOrder errorCode = iota
+	errorMessageCase
+	errorFieldCase
+	errorEnumTypeCase
+	errorEnumValueCase
+	errorServiceCase
+	errorRPCMethodCase
+)
+
+var linterErrors = []errorDescription{
+	"Sort import statements alphabetically.",
+	"Use CamelCase (with an initial capital) for message names.",
+	"Use underscore_separated_names for field names.",
+	"Use CamelCase (with an initial capital) for enum type names.",
+	"Use CAPITALS_WITH_UNDERSCORES  for enum value names.",
+	"Use CamelCase (with an initial capital) for service names.",
+	"Use CamelCase (with an initial capital) for RPC method names.",
 }
 
 // LintProtoFile takes a file name, proto file description, and a file.
@@ -47,6 +56,8 @@ func LintProtoFile(
 		errors      = protoBufErrors{}
 		protoSource = protoFile.GetSourceCodeInfo()
 	)
+
+	errors.lintImportOrder(protoFile.GetDependency())
 
 	for i, v := range protoFile.GetMessageType() {
 		errors.lintProtoMessage(int32(i), pathMessage, []int32{}, v)

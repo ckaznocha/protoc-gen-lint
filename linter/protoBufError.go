@@ -4,7 +4,7 @@ import "github.com/golang/protobuf/protoc-gen-go/descriptor"
 
 type protoBufError struct {
 	path        []int32
-	errorCode   int
+	errorCode   errorCode
 	errorString string
 }
 
