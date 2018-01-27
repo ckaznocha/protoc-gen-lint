@@ -1,6 +1,10 @@
 package linter
 
-import "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import (
+	"sort"
+
+	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+)
 
 type protoBufErrors []*protoBufError
 
@@ -141,6 +145,16 @@ func (p *protoBufErrors) lintProtoRPCMethod(
 			path:        path,
 			errorCode:   errorRPCMethodCase,
 			errorString: serviceMethod.GetName(),
+		})
+	}
+}
+
+func (p *protoBufErrors) lintImportOrder(dependencies []string) {
+	if !sort.StringsAreSorted(dependencies) {
+		p.addError(&protoBufError{
+			path:        []int32{},
+			errorCode:   errorImportOrder,
+			errorString: "import statements",
 		})
 	}
 }
