@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -33,7 +34,13 @@ func main() {
 		switch p {
 		case SortImports:
 			parameters.SortImports = true
+		default:
+			fmt.Fprintf(os.Stderr, "Unmatched parameter: %s", p)
+			totalErrors++
 		}
+	}
+	if totalErrors != 0 {
+		os.Exit(1)
 	}
 
 	data, err := ioutil.ReadAll(os.Stdin)
