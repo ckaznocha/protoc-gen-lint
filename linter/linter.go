@@ -46,36 +46,41 @@ var linterErrors = []errorDescription{
 	"Use CamelCase (with an initial capital) for RPC method names.",
 }
 
+type Config struct {
+	ProtoFile   *descriptor.FileDescriptorProto
+	OutFile     io.WriteCloser
+	SortImports bool
+}
+
 // LintProtoFile takes a file name, proto file description, and a file.
 // It checks the file for errors and writes them to the output file
-func LintProtoFile(
-	protoFile *descriptor.FileDescriptorProto,
-	outFile io.WriteCloser,
-) (int, error) {
+func LintProtoFile(conf Config) (int, error) {
 	var (
 		errors      = protoBufErrors{}
-		protoSource = protoFile.GetSourceCodeInfo()
+		protoSource = conf.ProtoFile.GetSourceCodeInfo()
 	)
 
-	errors.lintImportOrder(protoFile.GetDependency())
+	if conf.SortImports {
+		errors.lintImportOrder(conf.ProtoFile.GetDependency())
+	}
 
-	for i, v := range protoFile.GetMessageType() {
+	for i, v := range conf.ProtoFile.GetMessageType() {
 		errors.lintProtoMessage(int32(i), pathMessage, []int32{}, v)
 	}
 
-	for i, v := range protoFile.GetEnumType() {
+	for i, v := range conf.ProtoFile.GetEnumType() {
 		errors.lintProtoEnumType(int32(i), pathEnumType, []int32{}, v)
 	}
 
-	for i, v := range protoFile.GetService() {
+	for i, v := range conf.ProtoFile.GetService() {
 		errors.lintProtoService(int32(i), v)
 	}
 	for _, v := range errors {
 		line, col := v.getSourceLineNumber(protoSource)
 		fmt.Fprintf(
-			outFile,
+			conf.OutFile,
 			"%s:%d:%d: '%s' - %s\n",
-			*protoFile.Name,
+			*conf.ProtoFile.Name,
 			line,
 			col,
 			v.errorString,
