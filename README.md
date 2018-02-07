@@ -38,6 +38,16 @@ the executable is available in your PATH.
 ```
 protoc --lint_out=. *.proto
 ```
+### Optional Checks
+Optional checks are enabled but passing a comma separated list to the protoc
+"parameter". Example:
+```
+protoc --lint_out=sort_imports:. *.proto
+```
+
+Available optional checks:
+*   `sort_imports` - checks that imports are sorted in descending alphabetical
+order.
 
 ## TODO
 *   Write more tests

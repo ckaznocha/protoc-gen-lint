@@ -30,23 +30,21 @@ func main() {
 		}
 	)
 
+	data, err := ioutil.ReadAll(os.Stdin)
+	panicOnError(err)
+	panicOnError(proto.Unmarshal(data, &generatorRequest))
+
 	for _, p := range strings.Split(generatorRequest.GetParameter(), ",") {
-		switch p {
+		switch strings.TrimSpace(p) {
+		case "":
+			continue
 		case SortImports:
 			parameters.SortImports = true
 		default:
 			fmt.Fprintf(os.Stderr, "Unmatched parameter: %s", p)
-			totalErrors++
+			os.Exit(1)
 		}
 	}
-	if totalErrors != 0 {
-		os.Exit(1)
-	}
-
-	data, err := ioutil.ReadAll(os.Stdin)
-	panicOnError(err)
-
-	panicOnError(proto.Unmarshal(data, &generatorRequest))
 
 	for _, file := range generatorRequest.GetProtoFile() {
 		numErrors, err := linter.LintProtoFile(linter.Config{
