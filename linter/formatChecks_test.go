@@ -13,6 +13,8 @@ func TestIsCamelCase(t *testing.T) {
 		{"helloworld", false},
 		{"HELLOWORLD", false},
 		{"HelloWorld", true},
+		{"Sha512", true},
+		{"sha512", false},
 	}
 
 	for _, v := range stringsToTest {

@@ -1,19 +1,15 @@
 package linter
 
 import (
+	"regexp"
 	"strings"
-	"unicode"
-	"unicode/utf8"
 )
 
+// @see https://google.github.io/styleguide/javaguide.html#s5.3-camel-case
+var camelCaseRegexPattern, _ = regexp.Compile("\\A([A-Z][a-z0-9]+)((\\d)|([A-Z0-9][a-z0-9]+))*\\z")
+
 func isCamelCase(s string) bool {
-	first, _ := utf8.DecodeRuneInString(s)
-	if unicode.IsLower(first) ||
-		s == strings.ToUpper(s) ||
-		strings.Contains(s, "_") {
-		return false
-	}
-	return true
+	return camelCaseRegexPattern.Match([]byte(s))
 }
 
 func isLowerUnderscore(s string) bool {
