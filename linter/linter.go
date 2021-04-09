@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	//Path Types
+	// Path Types.
 	pathMessage        = 4
 	pathEnumType       = 5
 	pathEnumValue      = 2
@@ -26,7 +26,7 @@ type (
 )
 
 const (
-	//Error Types
+	// Error Types.
 	errorImportOrder errorCode = iota
 	errorMessageCase
 	errorFieldCase
@@ -36,7 +36,7 @@ const (
 	errorRPCMethodCase
 )
 
-var linterErrors = []errorDescription{
+var linterErrors = []errorDescription{ // nolint:gochecknoglobals // Global enum values.
 	"Sort import statements alphabetically.",
 	"Use CamelCase (with an initial capital) for message names.",
 	"Use underscore_separated_names for field names.",
@@ -53,7 +53,7 @@ type Config struct {
 }
 
 // LintProtoFile takes a file name, proto file description, and a file.
-// It checks the file for errors and writes them to the output file
+// It checks the file for errors and writes them to the output file.
 func LintProtoFile(conf Config) (int, error) {
 	var (
 		errors      = protoBufErrors{}
@@ -75,6 +75,7 @@ func LintProtoFile(conf Config) (int, error) {
 	for i, v := range conf.ProtoFile.GetService() {
 		errors.lintProtoService(int32(i), v)
 	}
+
 	for _, v := range errors {
 		line, col := v.getSourceLineNumber(protoSource)
 		fmt.Fprintf(
@@ -89,5 +90,4 @@ func LintProtoFile(conf Config) (int, error) {
 	}
 
 	return len(errors), nil
-
 }

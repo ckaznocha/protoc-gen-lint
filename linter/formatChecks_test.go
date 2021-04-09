@@ -3,7 +3,7 @@ package linter
 import "testing"
 
 func TestIsCamelCase(t *testing.T) {
-	var stringsToTest = []struct {
+	stringsToTest := []struct {
 		test string
 		want bool
 	}{
@@ -23,7 +23,7 @@ func TestIsCamelCase(t *testing.T) {
 }
 
 func TestIsLowerUnderscore(t *testing.T) {
-	var stringsToTest = []struct {
+	stringsToTest := []struct {
 		test string
 		want bool
 	}{
@@ -43,7 +43,7 @@ func TestIsLowerUnderscore(t *testing.T) {
 }
 
 func TestIsUpperUnderscore(t *testing.T) {
-	var stringsToTest = []struct {
+	stringsToTest := []struct {
 		test string
 		want bool
 	}{

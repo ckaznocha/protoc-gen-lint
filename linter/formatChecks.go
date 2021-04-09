@@ -13,19 +13,14 @@ func isCamelCase(s string) bool {
 		strings.Contains(s, "_") {
 		return false
 	}
+
 	return true
 }
 
 func isLowerUnderscore(s string) bool {
-	if s == strings.ToLower(s) {
-		return true
-	}
-	return false
+	return s == strings.ToLower(s)
 }
 
 func isUpperUnderscore(s string) bool {
-	if s == strings.ToUpper(s) {
-		return true
-	}
-	return false
+	return s == strings.ToUpper(s)
 }
