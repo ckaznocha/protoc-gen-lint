@@ -49,7 +49,8 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           path: artifacts
-      - run: |
+      - name: zip artifacts
+        run: |
           sh -c '
           for dir in artifacts/**/; do
               zip -j $(basename $dir).zip ${dir}/* README.md LICENSE; 
