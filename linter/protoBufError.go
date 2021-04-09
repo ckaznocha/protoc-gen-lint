@@ -3,17 +3,16 @@ package linter
 import "github.com/golang/protobuf/protoc-gen-go/descriptor"
 
 type protoBufError struct {
+	errorString string
 	path        []int32
 	errorCode   errorCode
-	errorString string
 }
 
 func (p *protoBufError) getSourceLineNumber(
 	protoSource *descriptor.SourceCodeInfo,
-) (int32, int32) {
-
+) (line, col int32) {
 	p.path = append(p.path, pathMessageName)
-	var sourceLen = len(p.path)
+	sourceLen := len(p.path)
 
 	for _, v := range protoSource.GetLocation() {
 		var (
@@ -28,6 +27,7 @@ func (p *protoBufError) getSourceLineNumber(
 			for i := 0; i < sourceLen; i++ {
 				if curPath[i] != p.path[i] {
 					skip = true
+
 					break
 				}
 			}
@@ -45,5 +45,6 @@ func (p *protoBufError) getSourceLineNumber(
 			return line, col
 		}
 	}
+
 	return 0, 0
 }

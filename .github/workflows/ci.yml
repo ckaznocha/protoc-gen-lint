@@ -1,0 +1,61 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [darwin, freebsd, linux, windows]
+        garch: ["386", amd64, arm, arm64]
+        exclude:
+          - goos: windows
+            garch: arm64
+          - goos: darwin
+            garch: arm
+    env:
+      GOOS: ${{ matrix.goos }}
+      GARCH: ${{ matrix.garch }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "^1"
+      - run: go build -v .
+      - uses: actions/upload-artifact@v2
+        with:
+          name: protoc-gen-lint_${{ matrix.goos }}_${{ matrix.garch }}
+          path: protoc-gen-lint*
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: golangci/golangci-lint-action@v2
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "^1"
+      - run: go test -v ./...
+  release:
+    needs: [build, lint, test]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          path: artifacts
+      - run: |
+          sh -c '
+          for dir in artifacts/**/; do
+              zip -j $(basename $dir).zip ${dir}/* README.md LICENSE; 
+          done'
+      - uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: protoc-gen-lint_*.zip

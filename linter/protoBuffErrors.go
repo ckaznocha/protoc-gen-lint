@@ -18,7 +18,6 @@ func (p *protoBufErrors) lintProtoMessage(
 	parentPath []int32,
 	protoMessage *descriptor.DescriptorProto,
 ) {
-
 	path := append(
 		parentPath,
 		pathType,
@@ -56,6 +55,7 @@ func (p *protoBufErrors) lintProtoField(
 		pathMessageField,
 		pathIndex,
 	)
+
 	if !isLowerUnderscore(messageField.GetName()) {
 		p.addError(&protoBufError{
 			path:        path,
@@ -100,6 +100,7 @@ func (p *protoBufErrors) lintProtoEnumValue(
 		pathEnumValue,
 		pathIndex,
 	)
+
 	if !isUpperUnderscore(enumVal.GetName()) {
 		p.addError(&protoBufError{
 			path:        path,
@@ -117,6 +118,7 @@ func (p *protoBufErrors) lintProtoService(
 		pathService,
 		pathIndex,
 	}
+
 	if !isCamelCase(protoService.GetName()) {
 		p.addError(&protoBufError{
 			path:        path,
@@ -140,6 +142,7 @@ func (p *protoBufErrors) lintProtoRPCMethod(
 		pathRPCMethod,
 		pathIndex,
 	)
+
 	if !isCamelCase(serviceMethod.GetName()) {
 		p.addError(&protoBufError{
 			path:        path,

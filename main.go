@@ -6,9 +6,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ckaznocha/protoc-gen-lint/linter"
 	"github.com/golang/protobuf/proto"
 	protoc "github.com/golang/protobuf/protoc-gen-go/plugin"
+
+	"github.com/ckaznocha/protoc-gen-lint/linter"
 )
 
 // SortImports represents the parameter, which can be specified to the tool invocation
@@ -53,6 +54,7 @@ func main() {
 			SortImports: parameters.SortImports,
 		})
 		panicOnError(err)
+
 		totalErrors += numErrors
 	}
 

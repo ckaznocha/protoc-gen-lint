@@ -1,0 +1,7 @@
+# github.com/golang/protobuf v0.0.0-20161117033126-8ee79997227b
+## explicit
+github.com/golang/protobuf/proto
+github.com/golang/protobuf/protoc-gen-go/descriptor
+github.com/golang/protobuf/protoc-gen-go/plugin
+# golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+## explicit
