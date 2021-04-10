@@ -3,7 +3,7 @@ package linter
 import (
 	"sort"
 
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+	"google.golang.org/protobuf/types/descriptorpb"
 )
 
 type protoBufErrors []*protoBufError
@@ -16,7 +16,7 @@ func (p *protoBufErrors) lintProtoMessage(
 	pathIndex int32,
 	pathType int32,
 	parentPath []int32,
-	protoMessage *descriptor.DescriptorProto,
+	protoMessage *descriptorpb.DescriptorProto,
 ) {
 	path := append(
 		parentPath,
@@ -48,7 +48,7 @@ func (p *protoBufErrors) lintProtoMessage(
 func (p *protoBufErrors) lintProtoField(
 	pathIndex int32,
 	parentPath []int32,
-	messageField *descriptor.FieldDescriptorProto,
+	messageField *descriptorpb.FieldDescriptorProto,
 ) {
 	path := append(
 		parentPath,
@@ -69,7 +69,7 @@ func (p *protoBufErrors) lintProtoEnumType(
 	pathIndex int32,
 	pathType int32,
 	parentPath []int32,
-	protoEnum *descriptor.EnumDescriptorProto,
+	protoEnum *descriptorpb.EnumDescriptorProto,
 ) {
 	path := append(
 		parentPath,
@@ -93,7 +93,7 @@ func (p *protoBufErrors) lintProtoEnumType(
 func (p *protoBufErrors) lintProtoEnumValue(
 	pathIndex int32,
 	parentPath []int32,
-	enumVal *descriptor.EnumValueDescriptorProto,
+	enumVal *descriptorpb.EnumValueDescriptorProto,
 ) {
 	path := append(
 		parentPath,
@@ -112,7 +112,7 @@ func (p *protoBufErrors) lintProtoEnumValue(
 
 func (p *protoBufErrors) lintProtoService(
 	pathIndex int32,
-	protoService *descriptor.ServiceDescriptorProto,
+	protoService *descriptorpb.ServiceDescriptorProto,
 ) {
 	path := []int32{
 		pathService,
@@ -135,7 +135,7 @@ func (p *protoBufErrors) lintProtoService(
 func (p *protoBufErrors) lintProtoRPCMethod(
 	pathIndex int32,
 	parentPath []int32,
-	serviceMethod *descriptor.MethodDescriptorProto,
+	serviceMethod *descriptorpb.MethodDescriptorProto,
 ) {
 	path := append(
 		parentPath,

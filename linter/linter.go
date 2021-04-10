@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+	"google.golang.org/protobuf/types/descriptorpb"
 )
 
 const (
@@ -47,7 +47,7 @@ var linterErrors = []errorDescription{ // nolint:gochecknoglobals // Global enum
 }
 
 type Config struct {
-	ProtoFile   *descriptor.FileDescriptorProto
+	ProtoFile   *descriptorpb.FileDescriptorProto
 	OutFile     io.WriteCloser
 	SortImports bool
 }

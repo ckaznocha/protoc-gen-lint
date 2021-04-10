@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/golang/protobuf/proto"
-	protoc "github.com/golang/protobuf/protoc-gen-go/plugin"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/pluginpb"
 
 	"github.com/ckaznocha/protoc-gen-lint/linter"
 )
@@ -16,24 +16,23 @@ import (
 // to enable checking, whether the proto file imports are sorted alphabetically.
 const SortImports = "sort_imports"
 
-func panicOnError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
 func main() {
 	var (
 		totalErrors      int
-		generatorRequest protoc.CodeGeneratorRequest
+		generatorRequest pluginpb.CodeGeneratorRequest
 		parameters       struct {
 			SortImports bool
 		}
 	)
 
 	data, err := ioutil.ReadAll(os.Stdin)
-	panicOnError(err)
-	panicOnError(proto.Unmarshal(data, &generatorRequest))
+	if err != nil {
+		panic(err)
+	}
+
+	if err := proto.Unmarshal(data, &generatorRequest); err != nil {
+		panic(err)
+	}
 
 	for _, p := range strings.Split(generatorRequest.GetParameter(), ",") {
 		switch strings.TrimSpace(p) {
@@ -53,7 +52,9 @@ func main() {
 			OutFile:     os.Stderr,
 			SortImports: parameters.SortImports,
 		})
-		panicOnError(err)
+		if err != nil {
+			panic(err)
+		}
 
 		totalErrors += numErrors
 	}
