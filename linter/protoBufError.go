@@ -1,6 +1,6 @@
 package linter
 
-import "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import "google.golang.org/protobuf/types/descriptorpb"
 
 type protoBufError struct {
 	errorString string
@@ -9,7 +9,7 @@ type protoBufError struct {
 }
 
 func (p *protoBufError) getSourceLineNumber(
-	protoSource *descriptor.SourceCodeInfo,
+	protoSource *descriptorpb.SourceCodeInfo,
 ) (line, col int32) {
 	p.path = append(p.path, pathMessageName)
 	sourceLen := len(p.path)
