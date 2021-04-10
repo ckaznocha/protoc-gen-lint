@@ -7,9 +7,20 @@ import (
 )
 
 func isCamelCase(s string) bool {
-	first, _ := utf8.DecodeRuneInString(s)
+	first, size := utf8.DecodeRuneInString(s)
+
+	var numberCount int
+
+	for _, c := range s[size:] {
+		if unicode.IsNumber(c) {
+			numberCount++
+		}
+	}
+
+	allNumeric := len(s[size:]) == numberCount
+
 	if unicode.IsLower(first) ||
-		s == strings.ToUpper(s) ||
+		(!allNumeric && s == strings.ToUpper(s)) ||
 		strings.Contains(s, "_") {
 		return false
 	}

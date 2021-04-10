@@ -1,63 +1,87 @@
 package linter
 
-import "testing"
+import (
+	"testing"
+)
 
-func TestIsCamelCase(t *testing.T) {
-	stringsToTest := []struct {
-		test string
-		want bool
-	}{
-		{"hello_world", false},
-		{"HELLO_WORLD", false},
-		{"helloWorld", false},
-		{"helloworld", false},
-		{"HELLOWORLD", false},
-		{"HelloWorld", true},
+func Test_isCamelCase(t *testing.T) {
+	type args struct {
+		s string
 	}
 
-	for _, v := range stringsToTest {
-		if got := isCamelCase(v.test); got != v.want {
-			t.Errorf("Expected %t, Received %t", v.want, got)
-		}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{"snake case", args{"hello_world"}, false},
+		{"screaming snake case", args{"HELLO_WORLD"}, false},
+		{"dromedary case", args{"helloWorld"}, false},
+		{"lower case", args{"helloworld"}, false},
+		{"screeming", args{"HELLOWORLD"}, false},
+		{"Pascal case", args{"HelloWorld"}, true},
+		{"dromedary case with first a signel leading alpha", args{"h264"}, false},
+		{"Pascal case with a single leading alpha", args{"H264"}, true},
+		{"Pascal case with some numbers after a leading alpha", args{"H264Encoded"}, true},
+		{"screeming with some numbers after a leading alpha", args{"H264ENCODED"}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isCamelCase(tt.args.s); got != tt.want {
+				t.Errorf("isCamelCase() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
 
-func TestIsLowerUnderscore(t *testing.T) {
-	stringsToTest := []struct {
-		test string
-		want bool
-	}{
-		{"hello_world", true},
-		{"HELLO_WORLD", false},
-		{"helloWorld", false},
-		{"helloworld", true},
-		{"HELLOWORLD", false},
-		{"HelloWorld", false},
+func Test_isLowerUnderscore(t *testing.T) {
+	type args struct {
+		s string
 	}
 
-	for _, v := range stringsToTest {
-		if got := isLowerUnderscore(v.test); got != v.want {
-			t.Errorf("Expected %t, Received %t", v.want, got)
-		}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{"snake case", args{"hello_world"}, true},
+		{"screaming snake case", args{"HELLO_WORLD"}, false},
+		{"dromedary case", args{"helloWorld"}, false},
+		{"lower case", args{"helloworld"}, true},
+		{"screaming", args{"HELLOWORLD"}, false},
+		{"Pascal case ", args{"HelloWorld"}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isLowerUnderscore(tt.args.s); got != tt.want {
+				t.Errorf("isLowerUnderscore(() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
 
-func TestIsUpperUnderscore(t *testing.T) {
-	stringsToTest := []struct {
-		test string
-		want bool
-	}{
-		{"hello_world", false},
-		{"HELLO_WORLD", true},
-		{"helloWorld", false},
-		{"helloworld", false},
-		{"HELLOWORLD", true},
-		{"HelloWorld", false},
+func Test_isUpperUnderscore(t *testing.T) {
+	type args struct {
+		s string
 	}
 
-	for _, v := range stringsToTest {
-		if got := isUpperUnderscore(v.test); got != v.want {
-			t.Errorf("Expected %t, Received %t", v.want, got)
-		}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{"snake case", args{"hello_world"}, false},
+		{"screaming snake case", args{"HELLO_WORLD"}, true},
+		{"dromedary case", args{"helloWorld"}, false},
+		{"lower case", args{"helloworld"}, false},
+		{"screaming", args{"HELLOWORLD"}, true},
+		{"Pascal case ", args{"HelloWorld"}, false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := isUpperUnderscore(tt.args.s); got != tt.want {
+				t.Errorf("sUpperUnderscore(() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
