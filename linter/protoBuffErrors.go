@@ -18,7 +18,7 @@ func (p *protoBufErrors) lintProtoMessage(
 	parentPath []int32,
 	protoMessage *descriptorpb.DescriptorProto,
 ) {
-	path := append(
+	path := append( //nolint:gocritic
 		parentPath,
 		pathType,
 		pathIndex,
@@ -50,7 +50,7 @@ func (p *protoBufErrors) lintProtoField(
 	parentPath []int32,
 	messageField *descriptorpb.FieldDescriptorProto,
 ) {
-	path := append(
+	path := append( //nolint:gocritic
 		parentPath,
 		pathMessageField,
 		pathIndex,
@@ -71,7 +71,7 @@ func (p *protoBufErrors) lintProtoEnumType(
 	parentPath []int32,
 	protoEnum *descriptorpb.EnumDescriptorProto,
 ) {
-	path := append(
+	path := append( //nolint:gocritic
 		parentPath,
 		pathType,
 		pathIndex,
@@ -95,7 +95,7 @@ func (p *protoBufErrors) lintProtoEnumValue(
 	parentPath []int32,
 	enumVal *descriptorpb.EnumValueDescriptorProto,
 ) {
-	path := append(
+	path := append( //nolint:gocritic
 		parentPath,
 		pathEnumValue,
 		pathIndex,
@@ -137,7 +137,7 @@ func (p *protoBufErrors) lintProtoRPCMethod(
 	parentPath []int32,
 	serviceMethod *descriptorpb.MethodDescriptorProto,
 ) {
-	path := append(
+	path := append( //nolint:gocritic
 		parentPath,
 		pathRPCMethod,
 		pathIndex,
