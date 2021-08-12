@@ -1,5 +1,5 @@
 # protoc-gen-lint
-[![Build Status](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/ci.yml/badge.svg)](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/ci.yml)
+[![Build Status](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/ci.yml)
 [![Release](http://img.shields.io/github/release/ckaznocha/protoc-gen-lint.svg?style=flat)](https://github.com/ckaznocha/protoc-gen-lint/releases/latest)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ckaznocha.mit-license.org)
 <!-- [![Coverage Status](https://img.shields.io/coveralls/ckaznocha/protoc-gen-lint.svg?style=flat)](https://coveralls.io/r/ckaznocha/protoc-gen-lint?branch=master) -->
