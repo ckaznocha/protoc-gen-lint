@@ -12,6 +12,8 @@ jobs:
             goarch: arm64
           - goos: darwin
             goarch: arm
+          - goos: darwin
+            goarch: "386"
     env:
       GOOS: ${{ matrix.goos }}
       GOARCH: ${{ matrix.goarch }}
