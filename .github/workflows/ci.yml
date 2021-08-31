@@ -6,15 +6,17 @@ jobs:
     strategy:
       matrix:
         goos: [darwin, freebsd, linux, windows]
-        garch: ["386", amd64, arm, arm64]
+        goarch: ["386", amd64, arm, arm64]
         exclude:
           - goos: windows
-            garch: arm64
+            goarch: arm64
           - goos: darwin
-            garch: arm
+            goarch: arm
+          - goos: darwin
+            goarch: "386"
     env:
       GOOS: ${{ matrix.goos }}
-      GARCH: ${{ matrix.garch }}
+      GOARCH: ${{ matrix.goarch }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
@@ -23,7 +25,7 @@ jobs:
       - run: go build -v .
       - uses: actions/upload-artifact@v2
         with:
-          name: protoc-gen-lint_${{ matrix.goos }}_${{ matrix.garch }}
+          name: protoc-gen-lint_${{ matrix.goos }}_${{ matrix.goarch }}
           path: protoc-gen-lint*
   lint:
     needs: build
