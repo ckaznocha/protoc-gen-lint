@@ -9,12 +9,10 @@ jobs:
         goarch: ["386", amd64, arm, arm64, ppc64le]
         exclude:
           - goos: windows
-            goarch: arm64
+            goarch: arm64, ppc64le
           - goos: darwin
-            goarch: arm
-          - goos: darwin
-            goarch: "386"
-          - goos: darwin
+            goarch: arm, "386", ppc64le
+          - goos: freebsd
             goarch: ppc64le
     env:
       GOOS: ${{ matrix.goos }}
