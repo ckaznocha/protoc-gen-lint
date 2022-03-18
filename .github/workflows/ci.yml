@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         goos: [darwin, freebsd, linux, windows]
-        goarch: ["386", amd64, arm, arm64]
+        goarch: ["386", amd64, arm, arm64, ppc64le]
         exclude:
           - goos: windows
             goarch: arm64
@@ -14,6 +14,8 @@ jobs:
             goarch: arm
           - goos: darwin
             goarch: "386"
+          - goos: darwin
+            goarch: ppc64le
     env:
       GOOS: ${{ matrix.goos }}
       GOARCH: ${{ matrix.goarch }}
@@ -59,6 +61,6 @@ jobs:
           done'
       - uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           files: protoc-gen-lint_*.zip
