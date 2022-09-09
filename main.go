@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"strings"
 
@@ -25,7 +25,7 @@ func main() {
 		}
 	)
 
-	data, err := ioutil.ReadAll(os.Stdin)
+	data, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		panic(err)
 	}

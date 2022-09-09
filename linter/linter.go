@@ -36,7 +36,7 @@ const (
 	errorRPCMethodCase
 )
 
-var linterErrors = []errorDescription{ // nolint:gochecknoglobals // Global enum values.
+var linterErrors = []errorDescription{ //nolint:gochecknoglobals // Global enum values.
 	"Sort import statements alphabetically.",
 	"Use CamelCase (with an initial capital) for message names.",
 	"Use underscore_separated_names for field names.",
