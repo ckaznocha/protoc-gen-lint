@@ -19,7 +19,6 @@ type BoolFlag interface {
 var errLint = errors.New("encountered lint errors")
 
 func main() {
-
 	var flags flag.FlagSet
 	sortImports := flags.Bool("sort_imports", false, "check whether or not the proto "+
 		"file imports are sorted alphabetically")
