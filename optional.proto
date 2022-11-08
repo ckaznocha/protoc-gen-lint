@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package test.optional;
+
+message WithOptional {
+	optional string test = 1;
+}
