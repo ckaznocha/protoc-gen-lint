@@ -1,15 +1,17 @@
-name: "CodeQL"
+name: "Code Scanning - Action"
 on:
   push:
     branches: ["master"]
   pull_request:
     branches: ["master"]
   schedule:
-    - cron: "45 13 * * 6"
-permissions: read-all
+    - cron: '17 6 * * 5'
+permissions:
+  actions: read
+  contents: read
+  security-events: write
 jobs:
-  analyze:
-    name: Analyze
+  CodeQL-Build:
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -30,3 +32,5 @@ jobs:
         uses: github/codeql-action/autobuild@959cbb7472c4d4ad70cdfe6f4976053fe48ab394 # v2.1.37
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@959cbb7472c4d4ad70cdfe6f4976053fe48ab394 # v2.1.37
+        with:
+          category: "/language:${{matrix.language}}"
