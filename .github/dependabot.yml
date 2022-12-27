@@ -1,0 +1,13 @@
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: "/"
+    schedule:
+      interval: "daily"
+    assignees:
+      - ckaznocha
+    reviewers:
+      - ckaznocha
+    commit-message:
+      prefix: "automated"
+      include: "scope"
