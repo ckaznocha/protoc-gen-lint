@@ -48,7 +48,7 @@ var linterErrors = []errorDescription{ //nolint:gochecknoglobals // Global enum 
 
 type Config struct {
 	ProtoFile   *descriptorpb.FileDescriptorProto
-	OutFile     io.WriteCloser
+	OutFile     io.Writer
 	SortImports bool
 }
 
@@ -81,7 +81,7 @@ func LintProtoFile(conf Config) (int, error) {
 		fmt.Fprintf(
 			conf.OutFile,
 			"%s:%d:%d: '%s' - %s\n",
-			*conf.ProtoFile.Name,
+			conf.ProtoFile.GetName(),
 			line,
 			col,
 			v.errorString,
