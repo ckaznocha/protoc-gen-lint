@@ -1,7 +1,10 @@
+
 # protoc-gen-lint
 [![Build Status](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/ci.yml)
 [![Release](http://img.shields.io/github/release/ckaznocha/protoc-gen-lint.svg?style=flat)](https://github.com/ckaznocha/protoc-gen-lint/releases/latest)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ckaznocha.mit-license.org)
+[![CodeQL](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/ckaznocha/protoc-gen-lint/actions/workflows/codeql-analysis.yml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/ckaznocha/protoc-gen-lint/badge)](https://api.securityscorecards.dev/projects/github.com/ckaznocha/protoc-gen-lint)
 <!-- [![Coverage Status](https://img.shields.io/coveralls/ckaznocha/protoc-gen-lint.svg?style=flat)](https://coveralls.io/r/ckaznocha/protoc-gen-lint?branch=master) -->
 
 A plug-in for Google's [Protocol Buffers](https://github.com/google/protobuf)
@@ -58,3 +61,4 @@ See the `CONTRIBUTING` file.
 
 ## License
 See `LICENSE` file
+
