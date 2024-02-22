@@ -7,20 +7,19 @@ find a ticket submit a new one.
 
 ## Pull Requests
 1. Fork the repo
-1. Check out a new topic branch from `dev`.
 1. Make your changes.
-1. Commit and push the topic branch.
+1. Commit and push to your fork.
     1. Extra credit if you squash your commits first.
-1. Submit a pull request back to `dev`.
+1. Submit a pull request.
 
-###Style
+### Style
 - Your code should pass golint.
 - Follow the existing conventions.
 
-###Tests
+### Tests
 - If you add any functionality be sure to also add a test for it.
 - All regressions need to pass before your pull can be accepted
 
 ## License
-By contributing to axosoft-python you agree that your contributions will be
+By contributing to protoc-gen-lint you agree that your contributions will be
 licensed under its MIT license.
