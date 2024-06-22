@@ -42,6 +42,7 @@ func main() {
 		gen.SupportedFeatures = uint64(pluginpb.CodeGeneratorResponse_FEATURE_PROTO3_OPTIONAL)
 
 		totalErrors := 0
+
 		for _, f := range gen.Files {
 			numErrors, err := linter.LintProtoFile(linter.Config{
 				ProtoFile:   f.Proto,
@@ -49,7 +50,7 @@ func main() {
 				SortImports: *sortImports,
 			})
 			if err != nil {
-				return err
+				return fmt.Errorf("failed to lint proto file %s: %w", f.Proto.GetName(), err)
 			}
 
 			totalErrors += numErrors

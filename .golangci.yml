@@ -1,6 +1,9 @@
 linters-settings:
   gci:
-    local-prefixes: github.com/ckaznocha/protoc-gen-lint
+    sections:
+      - standard
+      - default
+      - prefix(github.com/ckaznocha/protoc-gen-lint)
   gocritic:
     enabled-tags:
       - diagnostic
@@ -10,10 +13,7 @@ linters-settings:
       - style
   goimports:
     local-prefixes: github.com/ckaznocha/protoc-gen-lint
-  golint:
-    min-confidence: 0
   govet:
-    check-shadowing: true
     enable:
       - asmdecl
       - assign
@@ -54,52 +54,67 @@ linters:
   disable-all: true
   enable:
     - asciicheck
-    - deadcode
+    - containedctx
+    - contextcheck
+    - copyloopvar
+    - cyclop
     - dupl
+    - err113
     - errcheck
+    - errname
     - errorlint
     - exhaustive
     - exportloopref
+    - forcetypeassert
     - funlen
     - gci
+    - gocheckcompilerdirectives
     - gochecknoglobals
     - gochecknoinits
+    - gochecksumtype
     - gocognit
     - goconst
     - gocritic
     - gocyclo
     - godot
     - godox
-    - goerr113
     - gofmt
     - gofumpt
     - goimports
-    - gomnd
     - goprintffuncname
     - gosec
     - gosimple
     - govet
     - ineffassign
+    - intrange
     - lll
+    - maintidx
+    - makezero
+    - mirror
     - misspell
+    - mnd
     - nakedret
     - nestif
     - nilerr
+    - nilnil
     - nlreturn
     - noctx
     - nolintlint
     - prealloc
     - predeclared
+    - protogetter
+    - reassign
     - revive
     - rowserrcheck
     - staticcheck
-    - structcheck
     - stylecheck
+    - testableexamples
     - typecheck
     - unconvert
     - unparam
     - unused
-    - varcheck
+    - usestdlibvars
     - wastedassign
     - whitespace
+    - wrapcheck
     - wsl

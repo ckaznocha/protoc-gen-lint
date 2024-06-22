@@ -1,4 +1,5 @@
 # google.golang.org/protobuf v1.32.0
+## explicit; go 1.17
 google.golang.org/protobuf/compiler/protogen
 google.golang.org/protobuf/encoding/prototext
 google.golang.org/protobuf/encoding/protowire

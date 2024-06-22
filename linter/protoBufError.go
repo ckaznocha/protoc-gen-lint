@@ -24,7 +24,7 @@ func (p *protoBufError) getSourceLineNumber(
 		// Started out using reflect.DeepEqual.
 		// This is more verbose but should be much faster.
 		if curLen == sourceLen {
-			for i := 0; i < sourceLen; i++ {
+			for i := range sourceLen {
 				if curPath[i] != p.path[i] {
 					skip = true
 
